@@ -10,9 +10,6 @@ try {
     // Prepare a consulta SQL com parâmetros
     $stmt = $conn->prepare("INSERT INTO users (nome, sobrenome, email, senha, cep, cidade, uf, rua, numero, bairro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    // Verifica se o campo 'uf' foi preenchido
-    $uf = isset($_POST['uf']) ? $_POST['uf'] : '';
-
     // Criptografa a senha usando MD5
     $senhaCriptografada = md5($_POST['senha']);
 
@@ -23,7 +20,7 @@ try {
     $stmt->bindParam(4, $senhaCriptografada);
     $stmt->bindParam(5, $_POST['cep']);
     $stmt->bindParam(6, $_POST['cidade']);
-    $stmt->bindParam(7, $uf);
+    $stmt->bindParam(7, $_POST['uf']);
     $stmt->bindParam(8, $_POST['rua']);
     $stmt->bindParam(9, $_POST['numero']);
     $stmt->bindParam(10, $_POST['bairro']);
